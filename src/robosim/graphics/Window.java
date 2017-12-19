@@ -7,10 +7,9 @@ package robosim.graphics;
 
 import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.opengles.GLES20;
+import static org.lwjgl.opengles.GLES20.GL_FALSE;
 import static org.lwjgl.system.MemoryUtil.*;
-import org.lwjgl.glfw.GLFWVidMode.*;
 
-import java.nio.ByteBuffer;
 
 /**
  *
@@ -30,5 +29,18 @@ public class Window {
         
         window = glfwCreateWindow(width, height, title, NULL, NULL);
         
+    }
+    
+    public void dispose() {
+        glfwDestroyWindow(window);
+    }
+    public void hide() {
+        glfwHideWindow(window);
+    }
+    public void show() {
+        glfwShowWindow(window);
+    }
+    public void setTitle(String title) {
+        glfwSetWindowTitle(window, title);
     }
 }
