@@ -1,8 +1,9 @@
 package robosim;
 
+import robosim.graphics.*;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.system.MemoryUtil.*;
-import robosim.graphics.Window;
+//import robosim.graphics.Window;
+
 
 
 /**

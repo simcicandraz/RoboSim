@@ -6,8 +6,7 @@
 package robosim.graphics;
 
 import static org.lwjgl.glfw.GLFW.*;
-import org.lwjgl.opengles.GLES20;
-import static org.lwjgl.opengles.GLES20.GL_FALSE;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 
@@ -22,10 +21,10 @@ public class Window {
     
     public Window(int width, int height, String title) {
         glfwDefaultWindowHints();
-        glfwWindowHint(GLFW_RESIZABLE, GLES20.GL_FALSE);
-        glfwWindowHint(GLFW_VISIBLE, GLES20.GL_TRUE);
-        glfwWindowHint(GLFW_DECORATED, GLES20.GL_TRUE);
-        glfwWindowHint(GLFW_FOCUSED, GLES20.GL_TRUE);
+        glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+        glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
+        glfwWindowHint(GLFW_DECORATED, GL_TRUE);
+        glfwWindowHint(GLFW_FOCUSED, GL_TRUE);
         
         window = glfwCreateWindow(width, height, title, NULL, NULL);
         
@@ -42,5 +41,8 @@ public class Window {
     }
     public void setTitle(String title) {
         glfwSetWindowTitle(window, title);
+    }
+    public void onDestroy() {
+        
     }
 }
