@@ -5,7 +5,6 @@
  */
 package robosim.graphics;
 
-import java.nio.ByteBuffer;
 import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWVidMode;
 import static org.lwjgl.opengl.GL11.*;
@@ -31,10 +30,12 @@ public class Window {
         window = glfwCreateWindow(width, height, title, NULL, NULL);
         
         
-        GLFWVidMode vidmode = glfwGetVideoMode(window);
-        int x = (GLFWVidMode.WIDTH - width) / 2;
-        int y = (GLFWVidMode.HEIGHT - height) / 2;
-        glfwSetWindowPos(window, x, y);
+        GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        double x = (vidmode.width() - width) / 2;
+        double y = (vidmode.height() - height) / 2;
+        System.out.printf("x:%d | y:%d", vidmode.width(), vidmode.height());
+        
+        glfwSetWindowPos(window, (int)x, (int)y);
         
     }
     
