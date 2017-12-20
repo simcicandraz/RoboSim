@@ -18,7 +18,10 @@ public class RoboSim {
         
         while(true) {
             glfwPollEvents();
+            if(window.shouldClose()) {
+                break;
+            }
         }
-        //window.dispose();
+        window.dispose();
     }
 }

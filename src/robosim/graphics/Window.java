@@ -5,7 +5,9 @@
  */
 package robosim.graphics;
 
+import java.nio.ByteBuffer;
 import static org.lwjgl.glfw.GLFW.*;
+import org.lwjgl.glfw.GLFWVidMode;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -28,6 +30,12 @@ public class Window {
         
         window = glfwCreateWindow(width, height, title, NULL, NULL);
         
+        
+        GLFWVidMode vidmode = glfwGetVideoMode(window);
+        int x = (GLFWVidMode.WIDTH - width) / 2;
+        int y = (GLFWVidMode.HEIGHT - height) / 2;
+        glfwSetWindowPos(window, x, y);
+        
     }
     
     public void dispose() {
@@ -39,10 +47,13 @@ public class Window {
     public void show() {
         glfwShowWindow(window);
     }
+    public void render() {
+        glfwSwapBuffers(window);
+    }
     public void setTitle(String title) {
         glfwSetWindowTitle(window, title);
     }
-    public void onDestroy() {
-        
+    public boolean shouldClose() {
+        return glfwWindowShouldClose(window);
     }
 }
