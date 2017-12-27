@@ -5,6 +5,7 @@
  */
 package robosim.graphics;
 
+import java.awt.DisplayMode;
 import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWVidMode;
 import static org.lwjgl.opengl.GL11.*;
@@ -21,6 +22,7 @@ public class Window {
     private long window;
     
     public Window(int width, int height, String title) {
+        
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
         glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
@@ -33,7 +35,7 @@ public class Window {
         GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
         double x = (vidmode.width() - width) / 2;
         double y = (vidmode.height() - height) / 2;
-        System.out.printf("x:%d | y:%d", vidmode.width(), vidmode.height());
+        //System.out.printf("x:%d | y:%d\n", vidmode.width(), vidmode.height());
         
         glfwSetWindowPos(window, (int)x, (int)y);
         
@@ -57,7 +59,26 @@ public class Window {
     public boolean shouldClose() {
         return glfwWindowShouldClose(window);
     }
-    public void setFullscreen() {
-        glfwMaximizeWindow(window);
+    public void makeContext() {
+        glfwMakeContextCurrent(window);
+    }
+    public void swapBuffer() {
+        glfwSwapBuffers(window);
+    }
+    public int isKeyPressed(int key) {
+        System.out.println("Pressed");
+        if(glfwGetKey(window, GLFW_KEY_W) == GL_TRUE) {
+            return 1;
+        } else if(glfwGetKey(window, GLFW_KEY_A) == GL_TRUE) {
+            return 2;
+        } else if(glfwGetKey(window, GLFW_KEY_S) == GL_TRUE) {
+            return 3;
+        } else if(glfwGetKey(window, GLFW_KEY_D) == GL_TRUE) {
+            return 4;
+        } else if(glfwGetKey(window, GLFW_KEY_SPACE) == GL_TRUE) {
+            return 5;
+        } else {
+            return 0;
+        }
     }
 }
