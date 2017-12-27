@@ -57,4 +57,7 @@ public class Window {
     public boolean shouldClose() {
         return glfwWindowShouldClose(window);
     }
+    public void setFullscreen() {
+        glfwMaximizeWindow(window);
+    }
 }
