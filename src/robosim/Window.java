@@ -44,7 +44,7 @@ public class Window {
         if(isvSync()) {
             glfwSwapInterval(1);
         }
-        
+        System.out.println("se zgodi");
         glfwShowWindow(window);
         GL.createCapabilities();
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -58,7 +58,7 @@ public class Window {
     public void setClearColor(float r, float g, float b, float alpha) {
         glClearColor(r, g, b, alpha);
     }
-    public boolean winodwShouldClose() {
+    public boolean shouldClose() {
         return glfwWindowShouldClose(window);
     }
     public int getWidth() {

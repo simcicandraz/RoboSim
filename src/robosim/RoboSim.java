@@ -3,7 +3,12 @@ package robosim;
 
 public class RoboSim {
     public static void main(String[] args) {
-        Window window = new Window(1280,720,true);
-        window.init();
+        try {
+            GameEngine game = new GameEngine(1280, 720, true);
+            game.start();
+        } catch(Exception e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
     }
 }
