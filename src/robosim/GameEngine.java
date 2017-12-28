@@ -6,11 +6,13 @@ public class GameEngine implements Runnable {
     private final Window window;
     private final Thread gameThread;
     private final Timer timer;
+    private final GameLogic gameLogic;
     
-    public GameEngine(int width, int height, boolean vSync) throws Exception {
+    public GameEngine(int width, int height, boolean vSync, GameLogic gameLogic) throws Exception {
         gameThread = new Thread(this, "GAME_THREAD");
         window = new Window(width,height,vSync);
         timer = new Timer();
+        this.gameLogic = gameLogic;
     }
 
     @Override
@@ -20,12 +22,14 @@ public class GameEngine implements Runnable {
             gameLoop();
         } catch(Exception e) {
             e.printStackTrace();
+        } finally {
+            gameLogic.cleanup();
         }
     }
     
     public void start() {
         String osName = System.getProperty("os.name");
-        System.out.println(osName);
+        //System.out.println(osName);
         if(osName.contains("Mac")) {
             gameThread.run();
         } else {
@@ -33,9 +37,10 @@ public class GameEngine implements Runnable {
         }
     }
     
-    protected void init() {
+    protected void init() throws Exception {
         window.init();
         timer.init();
+        gameLogic.init();
     }
     
     protected void gameLoop() {
@@ -49,7 +54,7 @@ public class GameEngine implements Runnable {
             dodatek += pretekliCas;
             
             while(dodatek >= interval) {
-                
+                gameLogic.update(interval);
                 dodatek -= interval;
             }
             
@@ -61,9 +66,7 @@ public class GameEngine implements Runnable {
                 while(timer.getTime() < endTime) {
                     try {
                         Thread.sleep(1);
-                    } catch (InterruptedException ie) {
-                        
-                    }
+                    } catch (InterruptedException ie) {}
                 }
             }
         }
